@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 const path = require('path');
 
 module.exports = {
@@ -17,4 +18,9 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Battleship',
+        }),
+    ],
 };
