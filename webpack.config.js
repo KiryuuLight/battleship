@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/controller/gameInitController.js',
     output: {
         filename: 'main.js',
