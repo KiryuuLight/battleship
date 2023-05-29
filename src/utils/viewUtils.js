@@ -4,6 +4,14 @@ const createElement = (tag, className) => {
     return element;
 };
 
+const createButton = (text, className) => {
+    const btnContainer = createElement('div', 'btnContainer');
+    const btn = createElement('button', `btn ${className}`);
+    btn.textContent = text;
+    btnContainer.append(btn);
+    return btnContainer;
+};
+
 const getElement = (selector) => {
     const element = document.querySelector(selector);
     return element;
@@ -27,12 +35,10 @@ const createBoard = (board) => {
 
             if (board[i][j].shipInformation) {
                 if (board[i][j].shipInformation.isSunk())
-                    cell.classList.add('shipSunk');
+                    cell.classList.add('sunk');
             }
 
-            if (board[i][j].visited) {
-                cell.classList.add('visited');
-            }
+            if (board[i][j].visited) cell.classList.add('visited');
 
             cell.dataset.x = [i];
             cell.dataset.y = [j];
@@ -54,9 +60,29 @@ const createBoard = (board) => {
     return parent;
 };
 
+const createPlayer = (player) => {
+    const playerInfo = createElement('section', player.player.getName());
+    const playerName = createElement('p', 'playerName');
+    playerName.textContent = `${player.player.getName()}`;
+    const board = createBoard(player.board.getBoard());
+    board.id = player.player.getName();
+    playerInfo.append(playerName, board);
+
+    const isThere = getElement(`section.${player.player.getName()}`);
+
+    if (isThere) {
+        isThere.replaceWith(playerInfo);
+        return undefined;
+    }
+
+    return playerInfo;
+};
+
 export default {
     createElement,
+    createButton,
     createBoard,
+    createPlayer,
     getElement,
     getAllElements,
 };
